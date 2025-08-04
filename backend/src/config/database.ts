@@ -4,6 +4,8 @@ import { WatchlistItem } from '../models/WatchlistItem';
 import { FinancialReport } from '../models/FinancialReport';
 import { BoardResolution } from '../models/BoardResolution';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export const AppDataSource = new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST || 'localhost',
@@ -14,6 +16,11 @@ export const AppDataSource = new DataSource({
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development',
   entities: [Stock, WatchlistItem, FinancialReport, BoardResolution],
-  migrations: ['src/migrations/*.ts'],
-  subscribers: ['src/subscribers/*.ts'],
+  migrations: [
+    isProduction ? 'dist/migrations/*.js' : 'src/migrations/*.ts'
+  ],
+  subscribers: [
+    isProduction ? 'dist/subscribers/*.js' : 'src/subscribers/*.ts'
+  ],
+  migrationsRun: true, // Automatically run migrations on startup
 });

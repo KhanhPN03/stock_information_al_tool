@@ -11,7 +11,11 @@
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts --fix"
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "migration:generate": "typeorm-ts-node-esm migration:generate",
+    "migration:run": "typeorm-ts-node-esm migration:run -d src/config/database.ts",
+    "migration:revert": "typeorm-ts-node-esm migration:revert -d src/config/database.ts",
+    "db:setup": "npm run migration:run"
   },
   "dependencies": {
     "express": "^4.18.2",
