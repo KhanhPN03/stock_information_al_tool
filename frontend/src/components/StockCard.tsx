@@ -68,8 +68,8 @@ const StockCard: React.FC<StockCardProps> = ({
     }
   };
 
-  const PriceChangeIcon = stock.priceChange && stock.priceChange > 0 ? TrendingUp : 
-                         stock.priceChange && stock.priceChange < 0 ? TrendingDown : Remove;
+  const PriceChangeIcon = stock.priceChange != null && stock.priceChange > 0 ? TrendingUp : 
+                         stock.priceChange != null && stock.priceChange < 0 ? TrendingDown : Remove;
 
   return (
     <Card sx={{ mb: 2, '&:hover': { elevation: 4 } }}>
@@ -108,7 +108,7 @@ const StockCard: React.FC<StockCardProps> = ({
                 <Typography variant="h6" component="div">
                   {formatPrice(stock.currentPrice)} VND
                 </Typography>
-                {stock.priceChange !== undefined && (
+                {stock.priceChange != null && typeof stock.priceChange === 'number' && (
                   <Box display="flex" alignItems="center" gap={0.5}>
                     <PriceChangeIcon 
                       sx={{ 
@@ -121,7 +121,7 @@ const StockCard: React.FC<StockCardProps> = ({
                       sx={{ color: priceChangeColor, fontWeight: 'bold' }}
                     >
                       {stock.priceChange > 0 ? '+' : ''}{formatPrice(stock.priceChange)}
-                      {stock.priceChangePercent && (
+                      {stock.priceChangePercent != null && typeof stock.priceChangePercent === 'number' && (
                         ` (${stock.priceChangePercent > 0 ? '+' : ''}${stock.priceChangePercent.toFixed(2)}%)`
                       )}
                     </Typography>
@@ -136,7 +136,7 @@ const StockCard: React.FC<StockCardProps> = ({
             <Grid item xs={12}>
               <Box display="flex" justifyContent="space-between" alignItems="center" mt={1}>
                 <Box display="flex" gap={2}>
-                  {stock.volume && (
+                  {stock.volume != null && typeof stock.volume === 'number' && (
                     <Typography variant="body2" color="text.secondary">
                       Khối lượng: {formatVolume(stock.volume)}
                     </Typography>
