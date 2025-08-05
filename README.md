@@ -233,4 +233,4 @@ For questions or support, please open an issue in the GitHub repository.
 
 ---
 
-**Built with ❤️ for the Vietnamese stock market community**
+**Built with ❤️ from KhanhPN as Laza**
